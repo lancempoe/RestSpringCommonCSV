@@ -9,7 +9,7 @@ I used the following:
 - org.apache.commons.commons-csv _1.4_
 - StreamingOutput: javax.ws.rs-api _2.0.1_
 
-In this project I also tested with difference frameworks
+In this project I have also played with difference testing frameworks
 - org.jmockit _1.24_
 - junit _4.10_
 - org.hamcrest.hamcrest-junit _2.0.0.0_
