@@ -42,14 +42,6 @@ public class LocationTimeDeltaStatsServiceTest {
     }
 
     @Test
-    public void canCloseLocationsDateTimesReader() throws Exception {
-        whenNew(LocationsTimeOffsetReader.class).withAnyArguments().thenReturn(locationsTimeOffsetReader);
-        when(locationsTimeOffsetReader.getLocationsTimeOffsetsMap()).thenReturn(new HashMap());
-        subject.buildLocationTimeDeltaStatsCsv(CsvDataWriter);
-        verify(locationsTimeOffsetReader).close();
-    }
-
-    @Test
     public void canStartTheCsvBuildProcess() throws Exception {
         whenNew(LocationsDateTimesReader.class).withAnyArguments().thenReturn(locationsDateTimesReader);
         subject.buildLocationTimeDeltaStatsCsv(CsvDataWriter);
@@ -57,7 +49,7 @@ public class LocationTimeDeltaStatsServiceTest {
     }
 
     @Test
-    public void canCloseLocationsDateTimesReader() throws Exception {
+    public void canCloseLocationsDateTimesReader1() throws Exception {
         whenNew(LocationsDateTimesReader.class).withAnyArguments().thenReturn(locationsDateTimesReader);
         subject.buildLocationTimeDeltaStatsCsv(CsvDataWriter);
         verify(locationsDateTimesReader).close();
