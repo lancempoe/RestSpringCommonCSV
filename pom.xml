@@ -19,6 +19,7 @@
         <hamcrest-junit.version>2.0.0.0</hamcrest-junit.version>
         <mockito.version>1.10.19</mockito.version>
         <powermock.version>1.6.6</powermock.version>
+        <guava.version>20.0</guava.version>
     </properties>
 
     <dependencies>
@@ -91,6 +92,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-csv</artifactId>
             <version>${apache.commons-csv.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
 
         <!--Testing libraries-->

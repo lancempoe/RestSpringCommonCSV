@@ -1,59 +1,82 @@
 package com.lancep.service;
 
-import com.lancep.reader.LocationsTimeOffsetReader;
-import com.lancep.reader.LocationsDateTimesReader;
-import com.lancep.writer.CsvDataWriter;
+import com.google.common.collect.ImmutableMap;
+import com.lancep.csv.CsvDataWriter;
+import com.lancep.csv.CsvProcessor;
+import com.lancep.csv.CsvReader;
+import com.lancep.csv.util.ResourceLoader;
+import mockit.*;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.util.HashMap;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Map;
 
-import static org.mockito.Mockito.*;
-import static org.powermock.api.mockito.PowerMockito.whenNew;
-
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({LocationTimeDeltaStatsService.class})
 public class LocationTimeDeltaStatsServiceTest {
 
-    LocationTimeDeltaStatsService subject = new LocationTimeDeltaStatsService();
+    private @Tested LocationTimeDeltaStatsService subject;
 
-    @Mock
-    CsvDataWriter CsvDataWriter;
-    @Mock
-    LocationsDateTimesReader locationsDateTimesReader;
-    @Mock
-    LocationsTimeOffsetReader locationsTimeOffsetReader;
+    private @Mocked ResourceLoader resourceLoader;
+    private @Mocked CsvReader csvReader;
+    private @Mocked CsvProcessor processor;
+
+    private @Injectable CsvDataWriter writer;
+    private @Injectable InputStreamReader reader;
+
+    private static final Map<String, Integer> locationsTimeOffsets = ImmutableMap.<String, Integer>builder()
+            .put("portland", -7)
+            .build();
+
+
+    @Before
+    public void init() throws IOException {
+        new Expectations() {{
+            resourceLoader.getResource(anyString); result = reader;
+            csvReader.getLocationsTimeOffsetsMap(reader, (String[])any); result = locationsTimeOffsets; minTimes = 0;
+        }};
+    }
 
     @Test
-    public void canPrintLinesToCsv() throws Exception {
-        subject.buildLocationTimeDeltaStatsCsv(CsvDataWriter);
-        verify(CsvDataWriter, atLeastOnce()).printLineToCsv(anyList());
+    public void callsPrintStats() throws IOException {
+        new Expectations() {{
+            processor.printStats(writer, reader, locationsTimeOffsets); times =1;
+        }};
+
+        subject.buildLocationTimeDeltaStatsCsv(writer);
     }
 
     @Test
     public void canGetLocationsTimeOffsetsMap() throws Exception {
-        whenNew(LocationsTimeOffsetReader.class).withAnyArguments().thenReturn(locationsTimeOffsetReader);
-        when(locationsTimeOffsetReader.getLocationsTimeOffsetsMap()).thenReturn(new HashMap());
-        subject.buildLocationTimeDeltaStatsCsv(CsvDataWriter);
-        verify(locationsTimeOffsetReader).getLocationsTimeOffsetsMap();
+        new Expectations() {{
+            csvReader.getLocationsTimeOffsetsMap(reader, (String[])any); result = locationsTimeOffsets; times = 1;
+        }};
+
+        subject.buildLocationTimeDeltaStatsCsv(writer);
     }
 
     @Test
-    public void canStartTheCsvBuildProcess() throws Exception {
-        whenNew(LocationsDateTimesReader.class).withAnyArguments().thenReturn(locationsDateTimesReader);
-        subject.buildLocationTimeDeltaStatsCsv(CsvDataWriter);
-        verify(locationsDateTimesReader).buildLocationTimeDeltaStatsCsv(CsvDataWriter);
+    public void closesOpenReaders() throws Exception {
+        subject.buildLocationTimeDeltaStatsCsv(writer);
+        new Verifications() {{
+            reader.close(); minTimes = 1;
+        }};
     }
 
-    @Test
-    public void canCloseLocationsDateTimesReader1() throws Exception {
-        whenNew(LocationsDateTimesReader.class).withAnyArguments().thenReturn(locationsDateTimesReader);
-        subject.buildLocationTimeDeltaStatsCsv(CsvDataWriter);
-        verify(locationsDateTimesReader).close();
+    @Test(expected = IllegalArgumentException.class)
+    public void canHandleErrorsGettingLocations() throws IOException {
+        new Expectations() {{
+            csvReader.getLocationsTimeOffsetsMap(reader, (String[])any); result = new IllegalArgumentException();
+        }};
+        subject.buildLocationTimeDeltaStatsCsv(writer);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void canHandleErrorsWhileProcessing() throws IOException {
+        new Expectations() {{
+            processor.printStats(writer, reader, locationsTimeOffsets); result = new IllegalArgumentException();
+        }};
+        subject.buildLocationTimeDeltaStatsCsv(writer);
+    }
 
 }

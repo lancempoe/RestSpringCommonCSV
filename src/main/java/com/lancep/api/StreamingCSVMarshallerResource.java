@@ -1,7 +1,7 @@
 package com.lancep.api;
 
 import com.lancep.service.LocationTimeDeltaStatsService;
-import com.lancep.writer.CsvDataWriter;
+import com.lancep.csv.CsvDataWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

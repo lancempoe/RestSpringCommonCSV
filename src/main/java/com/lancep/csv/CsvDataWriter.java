@@ -1,4 +1,4 @@
-package com.lancep.writer;
+package com.lancep.csv;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;

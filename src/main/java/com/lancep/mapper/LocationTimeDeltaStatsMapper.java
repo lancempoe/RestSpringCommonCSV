@@ -1,4 +1,4 @@
-package com.lancep.factory;
+package com.lancep.mapper;
 
 import com.lancep.domain.DateTimeDataPointStats;
 import org.apache.commons.csv.CSVRecord;
@@ -9,19 +9,19 @@ import java.time.temporal.ChronoUnit;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import static com.lancep.util.CsvColumnNames.*;
+import static com.lancep.csv.CsvColumnNames.*;
 
-public class LocationTimeDeltaStatsAssembly {
+public class LocationTimeDeltaStatsMapper {
 
-    private static final Logger logger = Logger.getLogger(LocationTimeDeltaStatsAssembly.class.getName());
+    private static final Logger logger = Logger.getLogger(LocationTimeDeltaStatsMapper.class.getName());
 
     private final Map<String, Integer> LOCATION_TIME_OFFSETS;
 
-    public LocationTimeDeltaStatsAssembly(Map<String, Integer> locationTimeOffsets) {
+    public LocationTimeDeltaStatsMapper(Map<String, Integer> locationTimeOffsets) {
         LOCATION_TIME_OFFSETS = locationTimeOffsets;
     }
 
-    public DateTimeDataPointStats getDateTimeDataPointStats(CSVRecord record) {
+    public DateTimeDataPointStats toDateTimeDataPointStats(CSVRecord record) {
         DateTimeDataPointStats dateTimeDataPointStats = new DateTimeDataPointStats();
 
         dateTimeDataPointStats.setUniqueKey(getUniqueKey(record));

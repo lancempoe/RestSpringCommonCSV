@@ -1,7 +1,7 @@
-package com.lancep.factory;
+package com.lancep.mapper;
 
 import com.lancep.domain.DateTimeDataPointStats;
-import com.lancep.util.CsvColumnNames;
+import com.lancep.csv.CsvColumnNames;
 import jersey.repackaged.com.google.common.collect.ImmutableMap;
 import mockit.Expectations;
 import mockit.Injectable;
@@ -30,7 +30,7 @@ public class DateTimeDataPointStatsFactoryTest {
                                                                                 .put(STARTING_LOCATION, -7)
                                                                                 .put(ENDING_LOCATION, -4)
                                                                                 .build();
-    private final LocationTimeDeltaStatsAssembly subject = new LocationTimeDeltaStatsAssembly(LOCATION_TIME_OFFSETS);
+    private final LocationTimeDeltaStatsMapper subject = new LocationTimeDeltaStatsMapper(LOCATION_TIME_OFFSETS);
     @Injectable private CSVRecord record;
 
     @Before
@@ -50,27 +50,27 @@ public class DateTimeDataPointStatsFactoryTest {
     @Test
     public void canBuildUniqueKey() throws IOException {
         String key = UNiQUE_CODE + " " + UNIQUE_ID;
-        DateTimeDataPointStats dateTimeDataPointStats = subject.getDateTimeDataPointStats(record);
+        DateTimeDataPointStats dateTimeDataPointStats = subject.toDateTimeDataPointStats(record);
         assertThat(dateTimeDataPointStats.getUniqueKey(), is(key));
     }
 
     @Test
     public void canBuildStartingDelay() throws IOException {
         String startingDelay = "+3";
-        DateTimeDataPointStats dateTimeDataPointStats = subject.getDateTimeDataPointStats(record);
+        DateTimeDataPointStats dateTimeDataPointStats = subject.toDateTimeDataPointStats(record);
         assertThat(dateTimeDataPointStats.getStartingDelay(), is(startingDelay));
     }
 
     @Test
     public void canBuildEndingDelay() throws IOException {
         String endingDelay = "+10";
-        DateTimeDataPointStats dateTimeDataPointStats = subject.getDateTimeDataPointStats(record);
+        DateTimeDataPointStats dateTimeDataPointStats = subject.toDateTimeDataPointStats(record);
         assertThat(dateTimeDataPointStats.getEndingDelay(), is(endingDelay));
     }
 
     @Test
     public void canBuildTotalTime() throws IOException {
-        DateTimeDataPointStats dateTimeDataPointStats = subject.getDateTimeDataPointStats(record);
+        DateTimeDataPointStats dateTimeDataPointStats = subject.toDateTimeDataPointStats(record);
         String totalActualDelta = "322";
         assertThat(dateTimeDataPointStats.getTotalActualDelta(), is(totalActualDelta));
     }

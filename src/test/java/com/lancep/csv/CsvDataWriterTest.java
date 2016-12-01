@@ -1,5 +1,6 @@
-package com.lancep.writer;
+package com.lancep.csv;
 
+import com.lancep.csv.CsvDataWriter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +16,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 @RunWith(MockitoJUnitRunner.class)
 public class CsvDataWriterTest {
 
-    CsvDataWriter CsvDataWriter;
+    com.lancep.csv.CsvDataWriter CsvDataWriter;
     @Mock OutputStream outputStream;
 
     @Before
