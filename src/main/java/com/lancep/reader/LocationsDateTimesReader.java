@@ -1,7 +1,7 @@
 package com.lancep.reader;
 
 import com.lancep.domain.DateTimeDataPointStats;
-import com.lancep.factory.LocationTimeDeltaStatsFactory;
+import com.lancep.factory.LocationTimeDeltaStatsAssembly;
 import com.lancep.writer.CsvDataWriter;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -21,7 +21,7 @@ public class LocationsDateTimesReader extends CsvReader{
     private Map<String, Integer> LOCATION_TIME_OFFSETS;
     private String LOCATIONS_DATE_TIMES_FILE_PATH;
     private CSVParser csvRecords;
-    protected InputStreamReader reader;
+    private InputStreamReader reader;
 
     private final String[] FILE_HEADER_MAPPING = {
             UNIQUE_CODE,
@@ -44,7 +44,7 @@ public class LocationsDateTimesReader extends CsvReader{
 
         try {
             csvRecords = getCsvRecords(reader, FILE_HEADER_MAPPING);
-            LocationTimeDeltaStatsFactory factory = new LocationTimeDeltaStatsFactory(LOCATION_TIME_OFFSETS);
+            LocationTimeDeltaStatsAssembly factory = new LocationTimeDeltaStatsAssembly(LOCATION_TIME_OFFSETS);
             for(CSVRecord record : csvRecords) {
                 DateTimeDataPointStats dateTimeDataPointStats = factory.getDateTimeDataPointStats(record);
                 CsvDataWriter.printLineToCsv(dateTimeDataPointStats.getAsList());

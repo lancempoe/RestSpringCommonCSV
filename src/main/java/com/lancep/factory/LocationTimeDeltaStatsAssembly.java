@@ -11,13 +11,13 @@ import java.util.logging.Logger;
 
 import static com.lancep.util.CsvColumnNames.*;
 
-public class LocationTimeDeltaStatsFactory {
+public class LocationTimeDeltaStatsAssembly {
 
-    private static final Logger logger = Logger.getLogger(LocationTimeDeltaStatsFactory.class.getName());
+    private static final Logger logger = Logger.getLogger(LocationTimeDeltaStatsAssembly.class.getName());
 
     private final Map<String, Integer> LOCATION_TIME_OFFSETS;
 
-    public LocationTimeDeltaStatsFactory(Map<String, Integer> locationTimeOffsets) {
+    public LocationTimeDeltaStatsAssembly(Map<String, Integer> locationTimeOffsets) {
         LOCATION_TIME_OFFSETS = locationTimeOffsets;
     }
 
