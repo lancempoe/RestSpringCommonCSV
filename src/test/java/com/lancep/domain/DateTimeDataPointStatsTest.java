@@ -10,11 +10,11 @@ import static org.junit.Assert.assertThat;
 
 public class DateTimeDataPointStatsTest {
 
-    public static final String UNIQU_KEY = "uniquKey";
-    public static final String STARTING_DELAY = "arrival";
-    public static final String ENDING_DELAY = "departure";
-    public static final String TOTAL_TIME = "total";
-    DateTimeDataPointStats subject;
+    private static final String UNIQU_KEY = "uniquKey";
+    private static final String STARTING_DELAY = "arrival";
+    private static final String ENDING_DELAY = "departure";
+    private static final String TOTAL_TIME = "total";
+    private DateTimeDataPointStats subject;
 
     @Before
     public void init() {

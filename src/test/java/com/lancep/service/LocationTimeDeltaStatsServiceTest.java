@@ -1,6 +1,7 @@
 package com.lancep.service;
 
 import com.google.common.collect.ImmutableMap;
+import com.lancep.resource.errorhandling.CsvException;
 import com.lancep.csv.CsvDataWriter;
 import com.lancep.csv.CsvProcessor;
 import com.lancep.csv.CsvReader;
@@ -33,14 +34,14 @@ public class LocationTimeDeltaStatsServiceTest {
     public void init() throws IOException {
         new Expectations() {{
             resourceLoader.getResource(anyString); result = reader;
-            csvReader.getLocationsTimeOffsetsMap(reader, (String[])any); result = locationsTimeOffsets; minTimes = 0;
+            CsvReader.getLocationsTimeOffsetsMap(reader, (String[])any); result = locationsTimeOffsets; minTimes = 0;
         }};
     }
 
     @Test
     public void callsPrintStats() throws IOException {
         new Expectations() {{
-            processor.printStats(writer, reader, locationsTimeOffsets); times =1;
+            CsvProcessor.printStats(writer, reader, locationsTimeOffsets); times =1;
         }};
 
         subject.buildLocationTimeDeltaStatsCsv(writer);
@@ -48,8 +49,9 @@ public class LocationTimeDeltaStatsServiceTest {
 
     @Test
     public void canGetLocationsTimeOffsetsMap() throws Exception {
+
         new Expectations() {{
-            csvReader.getLocationsTimeOffsetsMap(reader, (String[])any); result = locationsTimeOffsets; times = 1;
+            CsvReader.getLocationsTimeOffsetsMap(reader, (String[])any); result = locationsTimeOffsets; times = 1;
         }};
 
         subject.buildLocationTimeDeltaStatsCsv(writer);
@@ -63,18 +65,18 @@ public class LocationTimeDeltaStatsServiceTest {
         }};
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = CsvException.class)
     public void canHandleErrorsGettingLocations() throws IOException {
         new Expectations() {{
-            csvReader.getLocationsTimeOffsetsMap(reader, (String[])any); result = new IllegalArgumentException();
+            CsvReader.getLocationsTimeOffsetsMap(reader, (String[])any); result = new IllegalArgumentException();
         }};
         subject.buildLocationTimeDeltaStatsCsv(writer);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = CsvException.class)
     public void canHandleErrorsWhileProcessing() throws IOException {
         new Expectations() {{
-            processor.printStats(writer, reader, locationsTimeOffsets); result = new IllegalArgumentException();
+            CsvProcessor.printStats(writer, reader, locationsTimeOffsets); result = new IllegalArgumentException();
         }};
         subject.buildLocationTimeDeltaStatsCsv(writer);
     }

@@ -10,7 +10,7 @@ import java.io.OutputStreamWriter;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class CsvDataWriter {
+public class CsvDataWriter implements AutoCloseable {
 
     private static final Logger logger = Logger.getLogger( CsvDataWriter.class.getName() );
 
@@ -37,6 +37,7 @@ public class CsvDataWriter {
         }
     }
 
+    @Override
     public void close() throws IOException {
         logger.info(String.format("Finished printing %d rows", lineCount));
 
@@ -47,8 +48,6 @@ public class CsvDataWriter {
     /**
      * Flushing at intervals will keep the app memory usage down. The user will see
      * progress each time the writer is flushed.
-     * @return
-     * @param lineCount
      */
     public boolean shouldFlush(int lineCount) {
         return lineCount % flushInterval == 0;
