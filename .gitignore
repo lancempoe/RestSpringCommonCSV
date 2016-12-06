@@ -19,3 +19,5 @@
 .idea
 target
 RestSpringCommonCSV.iml
+.gradle
+build
