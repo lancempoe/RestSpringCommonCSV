@@ -4,8 +4,8 @@ to the users as it is being build. This can process **big data**
 without worrying about memory usage. The data is flushed 
 back to the user after a set amount of lines are created. 
 I used the following:
-- org.glassfish.jersey _2_
-- org.springframework _4_
+- Jersey
+- Guice
 - org.apache.commons.commons-csv _1.4_
 - StreamingOutput: javax.ws.rs-api _2.0.1_
 

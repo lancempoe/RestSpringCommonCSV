@@ -15,6 +15,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Integration tests.
  */
+@SuppressWarnings("unused")
 public class CsvReaderTest {
 
     @Test

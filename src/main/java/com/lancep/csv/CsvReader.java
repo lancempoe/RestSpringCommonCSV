@@ -14,7 +14,6 @@ import java.util.Map;
 public class CsvReader {
 
     public static Map<String, Integer> getLocationsTimeOffsetsMap(InputStreamReader reader, String[] fileHeaders) throws IOException {
-        LocationTimeOffsetMapper mapper = new LocationTimeOffsetMapper();
         CSVParser parser = getRecords(reader, fileHeaders);
 
         Map<String, Integer> locationsTimeOffsets = new HashMap<>();

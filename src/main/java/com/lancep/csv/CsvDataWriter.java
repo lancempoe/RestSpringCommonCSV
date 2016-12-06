@@ -16,15 +16,14 @@ public class CsvDataWriter implements AutoCloseable {
 
     private static final String NEW_LINE_SEPARATOR = "\n";
     private static final CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR);
-    private final int flushInterval = 100;
+    private static final int flushInterval = 100;
 
-    private final BufferedWriter writer;
     private final CSVPrinter csvPrinter;
     private int lineCount = 0;
 
     public CsvDataWriter(OutputStream os) throws IOException {
         OutputStreamWriter out = new OutputStreamWriter(os);
-        writer = new BufferedWriter(out);
+        BufferedWriter writer = new BufferedWriter(out);
         csvPrinter = new CSVPrinter(writer, csvFileFormat);
     }
 

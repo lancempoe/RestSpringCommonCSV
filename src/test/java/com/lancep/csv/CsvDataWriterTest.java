@@ -12,6 +12,7 @@ import java.io.OutputStream;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
+@SuppressWarnings({"CanBeFinal", "unused"})
 @RunWith(MockitoJUnitRunner.class)
 public class CsvDataWriterTest {
 

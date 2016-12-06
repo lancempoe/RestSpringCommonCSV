@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
 
+@SuppressWarnings("unused")
 @Singleton
 @Path("streamingcsv")
 public class CSVMarshallerResource {

@@ -33,9 +33,9 @@ public class GuiceInitializer extends GuiceServletContextListener {
             }
 
             private void bindRestEndpoints() {
-                bind(HealthResource.class);
-                bind(CSVMarshallerResource.class);
                 bind(AppExceptionMapper.class);
+                bind(CSVMarshallerResource.class);
+                bind(HealthResource.class);
             }
         });
     }

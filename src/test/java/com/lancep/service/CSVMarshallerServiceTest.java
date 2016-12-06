@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 public class CSVMarshallerServiceTest {
 
     private @Tested

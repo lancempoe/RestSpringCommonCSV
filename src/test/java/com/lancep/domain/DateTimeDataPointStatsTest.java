@@ -8,9 +8,10 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+@SuppressWarnings("unused")
 public class DateTimeDataPointStatsTest {
 
-    private static final String UNIQU_KEY = "uniquKey";
+    private static final String UNIQUE_KEY = "uniqueKey";
     private static final String STARTING_DELAY = "arrival";
     private static final String ENDING_DELAY = "departure";
     private static final String TOTAL_TIME = "total";
@@ -29,9 +30,9 @@ public class DateTimeDataPointStatsTest {
 
     @Test
     public void getAsListProducesUniqueKeyInPosition1() throws Exception {
-        subject.setUniqueKey(UNIQU_KEY);
+        subject.setUniqueKey(UNIQUE_KEY);
         List<String> dateTimeDataPointStatsAsList = subject.getAsList();
-        assertThat(dateTimeDataPointStatsAsList.get(0), is(UNIQU_KEY));
+        assertThat(dateTimeDataPointStatsAsList.get(0), is(UNIQUE_KEY));
     }
 
     @Test

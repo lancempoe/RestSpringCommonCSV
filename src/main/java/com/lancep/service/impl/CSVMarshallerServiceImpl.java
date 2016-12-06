@@ -16,8 +16,8 @@ import static com.lancep.csv.CsvColumnNames.LOCATIONS_TIME_OFFSETS_HEADERS;
 @Singleton
 public class CSVMarshallerServiceImpl implements CSVMarshallerService {
 
-    private final String LOCATIONS_DATE_TIMES_FILE_PATH = "/csv/locations_date_times.csv";
-    private final String LOCATIONS_TIME_OFFSETS_FILE_PATH = "/csv/locations_time_offsets.csv";
+    private final static String LOCATIONS_DATE_TIMES_FILE_PATH = "/csv/locations_date_times.csv";
+    private final static String LOCATIONS_TIME_OFFSETS_FILE_PATH = "/csv/locations_time_offsets.csv";
     private final ResourceLoader resourceLoader = new ResourceLoader();
 
     public void buildLocationTimeDeltaStatsCsv(CsvDataWriter writer) throws CsvException {

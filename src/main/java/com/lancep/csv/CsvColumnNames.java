@@ -9,7 +9,7 @@ public class CsvColumnNames {
     public static final String FORECASTED_STARTING_DATE_TIME = "forecastedStartingDateTime";
     public static final String ACTUAL_STARTING_DATE_TIME = "actualStartingDateTime";
     public static final String FORECASTED_ENDING_DATE_TIME = "forecastedEndingDateTime";
-    public static final String ACTUAL_ENDING_DATE_TIME = "actualEndingDateTeime";
+    public static final String ACTUAL_ENDING_DATE_TIME = "actualEndingDateTime";
 
     public static final String LOCATION_CODE = "locationCode";
     public static final String TIMEZONE_OFFSET = "timezoneOffset";
