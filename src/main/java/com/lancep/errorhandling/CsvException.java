@@ -1,4 +1,4 @@
-package com.lancep.resource.errorhandling;
+package com.lancep.errorhandling;
 
 import javax.ws.rs.core.Response;
 

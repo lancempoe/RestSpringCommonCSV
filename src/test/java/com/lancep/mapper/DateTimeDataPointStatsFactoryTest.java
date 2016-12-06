@@ -1,8 +1,7 @@
 package com.lancep.mapper;
 
-import com.lancep.domain.DateTimeDataPointStats;
 import com.lancep.csv.CsvColumnNames;
-import jersey.repackaged.com.google.common.collect.ImmutableMap;
+import com.lancep.domain.DateTimeDataPointStats;
 import mockit.Expectations;
 import mockit.Injectable;
 import org.apache.commons.csv.CSVRecord;
@@ -10,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -26,11 +26,14 @@ public class DateTimeDataPointStatsFactoryTest {
     private static final String FORECASTED_ENDING_DATE = "2015-01-01T16:15:00";
     private static final String ACTION_ENDING_DATE = "2015-01-01T16:25:00";
 
-    private final Map<String, Integer> LOCATION_TIME_OFFSETS = ImmutableMap.<String, Integer>builder()
-                                                                                .put(STARTING_LOCATION, -7)
-                                                                                .put(ENDING_LOCATION, -4)
-                                                                                .build();
-    private final LocationTimeDeltaStatsMapper subject = new LocationTimeDeltaStatsMapper(LOCATION_TIME_OFFSETS);
+    private static final Map<String, Integer> LOCATION_TIME_OFFSETS;
+    static {
+        LOCATION_TIME_OFFSETS = new HashMap<>();
+        LOCATION_TIME_OFFSETS.put(STARTING_LOCATION, -7);
+        LOCATION_TIME_OFFSETS.put(ENDING_LOCATION, -4);
+    }
+
+    private final DateTimeDataPointStatsMapper subject = new DateTimeDataPointStatsMapper(LOCATION_TIME_OFFSETS);
     @Injectable private CSVRecord record;
 
     @Before

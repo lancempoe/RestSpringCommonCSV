@@ -1,29 +1,28 @@
 package com.lancep.resource;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.lancep.csv.CsvDataWriter;
-import com.lancep.service.LocationTimeDeltaStatsService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.lancep.service.CSVMarshallerService;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
-import java.util.logging.Logger;
 
-@Component
+@Singleton
 @Path("streamingcsv")
-public class StreamingCSVMarshallerResource {
+public class CSVMarshallerResource {
 
-    private LocationTimeDeltaStatsService locationTimeDeltaStatsService;
+    private CSVMarshallerService CSVMarshallerService;
 
     @GET
     @Produces("text/csv")
     public Response getLocationTimeDeltaStats() {
         StreamingOutput stream = os -> {
             try (CsvDataWriter CsvDataWriter = new CsvDataWriter(os)) {
-                locationTimeDeltaStatsService.buildLocationTimeDeltaStatsCsv(CsvDataWriter);
+                CSVMarshallerService.buildLocationTimeDeltaStatsCsv(CsvDataWriter);
             }
         };
 
@@ -33,8 +32,8 @@ public class StreamingCSVMarshallerResource {
                 .build();
     }
 
-    @Autowired
-    public void setLocationTimeDeltaStatsService(LocationTimeDeltaStatsService locationTimeDeltaStatsService) {
-        this.locationTimeDeltaStatsService = locationTimeDeltaStatsService;
+    @Inject
+    public void setCSVMarshallerService(CSVMarshallerService CSVMarshallerService) {
+        this.CSVMarshallerService = CSVMarshallerService;
     }
 }

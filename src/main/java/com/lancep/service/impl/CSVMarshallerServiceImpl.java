@@ -1,19 +1,20 @@
-package com.lancep.service;
+package com.lancep.service.impl;
 
-import com.lancep.resource.errorhandling.CsvException;
+import com.google.inject.Singleton;
 import com.lancep.csv.CsvDataWriter;
 import com.lancep.csv.CsvProcessor;
 import com.lancep.csv.CsvReader;
 import com.lancep.csv.util.ResourceLoader;
-import org.springframework.stereotype.Component;
+import com.lancep.errorhandling.CsvException;
+import com.lancep.service.CSVMarshallerService;
 
 import java.io.InputStreamReader;
 import java.util.Map;
 
 import static com.lancep.csv.CsvColumnNames.LOCATIONS_TIME_OFFSETS_HEADERS;
 
-@Component
-public class LocationTimeDeltaStatsService {
+@Singleton
+public class CSVMarshallerServiceImpl implements CSVMarshallerService {
 
     private final String LOCATIONS_DATE_TIMES_FILE_PATH = "/csv/locations_date_times.csv";
     private final String LOCATIONS_TIME_OFFSETS_FILE_PATH = "/csv/locations_time_offsets.csv";
@@ -43,3 +44,4 @@ public class LocationTimeDeltaStatsService {
     }
 
 }
+

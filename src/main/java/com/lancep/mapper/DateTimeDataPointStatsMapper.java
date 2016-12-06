@@ -11,13 +11,13 @@ import java.util.logging.Logger;
 
 import static com.lancep.csv.CsvColumnNames.*;
 
-public class LocationTimeDeltaStatsMapper {
+public class DateTimeDataPointStatsMapper {
 
-    private static final Logger logger = Logger.getLogger(LocationTimeDeltaStatsMapper.class.getName());
+    private static final Logger logger = Logger.getLogger(DateTimeDataPointStatsMapper.class.getName());
 
     private final Map<String, Integer> LOCATION_TIME_OFFSETS;
 
-    public LocationTimeDeltaStatsMapper(Map<String, Integer> locationTimeOffsets) {
+    public DateTimeDataPointStatsMapper(Map<String, Integer> locationTimeOffsets) {
         LOCATION_TIME_OFFSETS = locationTimeOffsets;
     }
 

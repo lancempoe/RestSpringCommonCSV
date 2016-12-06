@@ -1,5 +1,6 @@
 package com.lancep.csv;
 
+import com.lancep.domain.LocationTimeOffsets;
 import com.lancep.mapper.LocationTimeOffsetMapper;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -18,7 +19,8 @@ public class CsvReader {
 
         Map<String, Integer> locationsTimeOffsets = new HashMap<>();
         for(CSVRecord record : parser.getRecords()) {
-            locationsTimeOffsets.put(mapper.getLocationCode(record), mapper.getTimezoneOffset(record));
+            LocationTimeOffsets locationTimeOffsets = LocationTimeOffsetMapper.toLocationTimeOffsets(record);
+            locationsTimeOffsets.put(locationTimeOffsets.getLocationCode(), locationTimeOffsets.getTimezoneOffset());
         }
         return locationsTimeOffsets;
     }

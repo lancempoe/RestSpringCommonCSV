@@ -1,5 +1,6 @@
-package com.lancep.resource.errorhandling;
+package com.lancep.errorhandling;
 
+import javax.inject.Singleton;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -7,6 +8,7 @@ import javax.ws.rs.ext.Provider;
 import java.util.logging.Logger;
 
 @Provider
+@Singleton
 public class AppExceptionMapper implements ExceptionMapper<CsvException> {
 
     private static final Logger logger = Logger.getLogger( AppExceptionMapper.class.getName() );
