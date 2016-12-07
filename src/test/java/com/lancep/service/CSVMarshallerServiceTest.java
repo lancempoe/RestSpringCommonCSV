@@ -7,8 +7,10 @@ import com.lancep.csv.util.ResourceLoader;
 import com.lancep.errorhandling.CsvException;
 import com.lancep.service.impl.CSVMarshallerServiceImpl;
 import mockit.*;
+import mockit.integration.junit4.JMockit;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("unused")
+@RunWith(JMockit.class)
 public class CSVMarshallerServiceTest {
 
     private @Tested

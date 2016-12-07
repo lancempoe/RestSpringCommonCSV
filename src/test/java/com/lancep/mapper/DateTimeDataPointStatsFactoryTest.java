@@ -4,9 +4,11 @@ import com.lancep.csv.CsvColumnNames;
 import com.lancep.domain.DateTimeDataPointStats;
 import mockit.Expectations;
 import mockit.Injectable;
+import mockit.integration.junit4.JMockit;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,6 +18,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @SuppressWarnings("unused")
+@RunWith(JMockit.class)
 public class DateTimeDataPointStatsFactoryTest {
 
     private static final String UNiQUE_CODE = "UA";

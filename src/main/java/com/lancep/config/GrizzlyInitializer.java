@@ -38,12 +38,9 @@ public class GrizzlyInitializer {
         context.deploy(server);
 
         // register shutdown hook
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            @Override
-            public void run() {
-                logger.info("Stopping server..");
-                server.shutdown();
-            }
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            logger.info("Stopping server..");
+            server.shutdown();
         }, "shutdownHook"));
 
         try {

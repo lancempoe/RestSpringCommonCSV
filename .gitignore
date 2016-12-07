@@ -11,13 +11,10 @@
 ## Plugin-specific files:
 
 # IntelliJ
-/out/
-
 # mpeltonen/sbt-idea plugin
 # JIRA plugin
 # Crashlytics plugin (for Android Studio and IntelliJ)
 .idea
-target
 RestSpringCommonCSV.iml
 .gradle
 build

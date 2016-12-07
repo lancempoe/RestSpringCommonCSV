@@ -1,23 +1,23 @@
 package com.lancep.csv;
 
+import mockit.Mocked;
+import mockit.integration.junit4.JMockit;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.junit.MatcherAssert.assertThat;
+import static org.junit.Assert.assertThat;
 
 @SuppressWarnings({"CanBeFinal", "unused"})
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(JMockit.class)
 public class CsvDataWriterTest {
 
     private CsvDataWriter CsvDataWriter;
-    private @Mock OutputStream outputStream;
+    private @Mocked OutputStream outputStream;
 
     @Before
     public void init() throws IOException {
