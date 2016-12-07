@@ -1,19 +1,19 @@
 package com.lancep.service.impl;
 
-import com.google.inject.Singleton;
 import com.lancep.csv.CsvDataWriter;
 import com.lancep.csv.CsvProcessor;
 import com.lancep.csv.CsvReader;
 import com.lancep.csv.util.ResourceLoader;
 import com.lancep.errorhandling.CsvException;
 import com.lancep.service.CSVMarshallerService;
+import org.springframework.stereotype.Service;
 
 import java.io.InputStreamReader;
 import java.util.Map;
 
 import static com.lancep.csv.CsvColumnNames.LOCATIONS_TIME_OFFSETS_HEADERS;
 
-@Singleton
+@Service
 public class CSVMarshallerServiceImpl implements CSVMarshallerService {
 
     private final static String LOCATIONS_DATE_TIMES_FILE_PATH = "/csv/locations_date_times.csv";

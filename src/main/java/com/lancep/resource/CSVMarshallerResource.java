@@ -1,9 +1,9 @@
 package com.lancep.resource;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.lancep.csv.CsvDataWriter;
 import com.lancep.service.CSVMarshallerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
 
 @SuppressWarnings("unused")
-@Singleton
+@Controller
 @Path("streamingcsv")
 public class CSVMarshallerResource {
 
@@ -33,7 +33,7 @@ public class CSVMarshallerResource {
                 .build();
     }
 
-    @Inject
+    @Autowired
     public void setCSVMarshallerService(CSVMarshallerService CSVMarshallerService) {
         this.CSVMarshallerService = CSVMarshallerService;
     }
